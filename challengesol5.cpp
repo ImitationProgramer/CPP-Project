@@ -51,6 +51,13 @@ Finally, be sure to test your program as you go and at the end.
 
 Hint : Use a vector!
 
+Additional functionality if you wish to extend this program.
+
+-search for a number in the list and if found display the number of times it occurs in the list
+-clearing out the list (make it empty again)(Hint: the vector class has a .clear() method)
+-don't allow duplicate entries
+-come up with your own ideas!
+
 */
 #include <iostream>
 #include <vector>
@@ -59,12 +66,20 @@ int main()
 {
     bool the_end{false};
     vector<int> data{};
-    int data_item{}, min{0}, max{0};
+    int data_item{}, min{0}, max{0}, find_number{0}, count{0};
     double sum{0}, avg{0};
     char choice{};
-
+    cout << "P - Print numbers" << endl;
+    cout << "A - Add a number" << endl;
+    cout << "F - Find a number and count" << endl;
+    cout << "C - Clear a list" << endl;
+    cout << "M - Display mean of the numbers" << endl;
+    cout << "S - Display the smallest number" << endl;
+    cout << "L - Display the largest number" << endl;
+    cout << "Q - Quit" << endl;
     while (the_end == false)
     {
+
         cout << "Enter your choice: ";
         cin >> choice;
         switch (choice)
@@ -77,9 +92,7 @@ int main()
             {
                 cout << "[";
                 for (int i{0}; i < data.size(); i++)
-                {
                     cout << data.at(i) << " ";
-                }
                 cout << "]" << endl;
             }
             break;
@@ -90,6 +103,35 @@ int main()
             data.push_back(data_item);
             cout << data_item << " added" << endl;
             break;
+        case 'F':
+        case 'f':
+            if (data.size() == 0)
+                cout << "Can't find a number - no data" << endl;
+            else
+            {
+                cout << "What number do you want to find?: ";
+                cin >> find_number;
+                for (int i{0}; i < data.size(); i++)
+                {
+                    if (data.at(i) == find_number)
+                        count++;
+                }
+                if (count > 0)
+                    cout << find_number << " is " << count << " times in the list" << endl;
+                else
+                    cout << find_number << " is not in the list" << endl;
+                count = 0;
+            }
+            break;
+        case 'C':
+        case 'c':
+            if (data.size() == 0)
+                cout << "It is already empty - no data" << endl;
+            else
+            {
+                data.clear();
+                break;
+            }
         case 'M':
         case 'm':
             if (data.size() == 0)
